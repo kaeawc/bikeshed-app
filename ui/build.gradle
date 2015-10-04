@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion androidSdkTarget
+    buildToolsVersion androidBuildTools
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries true
+        incremental true
+    }
+
+    defaultConfig {
+        minSdkVersion androidSdkMinimum
+        targetSdkVersion androidSdkTarget
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile project(':data')
+    compile project(':core')
+    compile project(':network')
+
+    // Google Support Library
+    compile "com.android.support:appcompat-v7:${androidSupportLibraryVersion}"
+
+    // Dependency Injection
+    apt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    compile "com.google.dagger:dagger:${daggerVersion}"
+
+    // Android does not have @Generated
+    provided "javax.annotation:jsr250-api:${jsr250Version}"
+
+    // Unit Testing
+    testCompile "junit:junit:${junitVersion}"
+
+    // Integration Testing
+}

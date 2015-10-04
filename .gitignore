@@ -1,0 +1,82 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+bin/
+.apt_generated/
+*.iml
+
+compile-libs/
+libraries/
+gen/
+*.apk
+
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+res/values/com_crashlytics_export_strings.xml
+proguard/dump.txt
+
+# Intellij #
+############
+.idea/
+
+# Eclipse #
+###########
+.classpath
+.project
+.settings/
+
+# Gradle #
+##########
+.gradle/
+build/
+gradle.build
+
+# local property files #
+########################
+local.properties
+keystore.properties
+
+# key for signing releases
+hinge-release.keystore
+release.keystore
+
+secrets.tar
+
+src/local/assets/webservice.properties
+
+*.iml
+
+manifest-merger-dev-debug-report.txt
+
