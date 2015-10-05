@@ -1,14 +1,26 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 
+// Apt configuration
+apt {
+    arguments {
+        resourcePackageName "io.kaeawc.bikeshed.core"
+    }
+}
+
+// List of configurations for gradle to use
+configurations {
+    apt
+}
+
 android {
     compileSdkVersion androidSdkTarget
     buildToolsVersion androidBuildTools
 
     dexOptions {
-        javaMaxHeapSize "4g"
-        preDexLibraries true
-        incremental true
+        javaMaxHeapSize dexJavaMaxHeapSize
+        preDexLibraries dexPreDexLibraries
+        incremental dexIncremental
     }
 
     defaultConfig {
@@ -19,6 +31,19 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+//    productFlavors {
+//        normal {
+//            // No ability to choose mock core modules
+//        }
+//        mock {
+//            // Ability to toggle mock core modules
+//        }
+//        fast {
+//            // Allows for faster builds
+//            minSdkVersion androidSdkMinimumFast
+//        }
+//    }
 
     buildTypes {
         debug {
@@ -44,14 +69,38 @@ android {
     }
 
     lintOptions {
-        abortOnError false
+        abortOnError lintAbortOnError
+        checkReleaseBuilds lintCheckReleaseBuilds
+        absolutePaths lintAbsolutePaths
+        checkAllWarnings lintCheckAllWarnings
     }
 
-//    android.enforceUniquePackageName = false
-//    android.packageBuildConfig = false
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = unitTestsReturnDefaultValues
+    }
+
+//    android.libraryVariants.all { variant ->
+//        task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+//            description "Generates Javadoc for $variant.name."
+//            source = variant.javaCompile.source
+//            classpath = files(variant.javaCompile.classpath.files) + files(android.bootClasspath)
+//            options.links("http://docs.oracle.com/javase/7/docs/api/");
+//            options.linksOffline("http://d.android.com/reference", "${android.sdkDirectory}/docs/reference");
+//            exclude '**/BuildConfig.java'
+//            exclude '**/R.java'
+//        }
+//    }
 }
 
 dependencies {
+
+    // Google Support Library
+    compile "com.android.support:appcompat-v7:${androidSupportLibraryVersion}"
 
     // Dependency Injection
     apt "com.google.dagger:dagger-compiler:${daggerVersion}"
@@ -59,6 +108,9 @@ dependencies {
 
     // Android does not have @Generated
     provided "javax.annotation:jsr250-api:${jsr250Version}"
+
+    // Logging
+    compile 'com.jakewharton.timber:timber:3.1.0'
 
     // Unit Testing
     testCompile "junit:junit:${junitVersion}"

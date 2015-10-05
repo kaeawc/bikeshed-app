@@ -3,7 +3,7 @@
     package="io.kaeawc.bikeshed" >
 
     <application
-        android:name=".core.App"
+        android:name="io.kaeawc.bikeshed.core.App"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
