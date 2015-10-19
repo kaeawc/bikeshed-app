@@ -20,18 +20,19 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-//    productFlavors {
-//        normal {
-//            // No ability to choose mock core modules
-//        }
-//        mock {
-//            // Ability to toggle mock core modules
-//        }
-//        fast {
-//            // Allows for faster builds
-//            minSdkVersion androidSdkMinimumFast
-//        }
-//    }
+    publishNonDefault true
+    productFlavors {
+        store {
+            // No ability to choose mock core modules
+        }
+        mock {
+            // Ability to toggle mock core modules
+        }
+        fast {
+            // Allows for faster builds
+            minSdkVersion androidSdkMinimumFast
+        }
+    }
 
     buildTypes {
         debug {
@@ -85,8 +86,22 @@ android {
 //    }
 }
 
+configurations {
+    storeDebugCompile
+    mockDebugCompile
+    fastDebugCompile
+    storeReleaseCompile
+    mockReleaseCompile
+    fastReleaseCompile
+}
+
 dependencies {
-    compile project(':core')
+    storeDebugCompile project(path: ':core', configuration: 'storeDebug')
+    mockDebugCompile project(path: ':core', configuration: 'mockDebug')
+    fastDebugCompile project(path: ':core', configuration: 'fastDebug')
+    storeReleaseCompile project(path: ':core', configuration: 'storeRelease')
+    mockReleaseCompile project(path: ':core', configuration: 'mockRelease')
+    fastReleaseCompile project(path: ':core', configuration: 'fastRelease')
 
     // Dependency Injection
     apt "com.google.dagger:dagger-compiler:${daggerVersion}"

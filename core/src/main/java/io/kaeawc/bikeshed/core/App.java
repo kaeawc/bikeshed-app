@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import javax.inject.Inject;
 
 public class App extends Application {
+
     private AppComponent appComponent;
 
     @Inject ConnectivityManager mConnectivityManager;

@@ -20,18 +20,19 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-//    productFlavors {
-//        normal {
-//            // No ability to choose mock core modules
-//        }
-//        mock {
-//            // Ability to toggle mock core modules
-//        }
-//        fast {
-//            // Allows for faster builds
-//            minSdkVersion androidSdkMinimumFast
-//        }
-//    }
+    publishNonDefault true
+    productFlavors {
+        store {
+            // No ability to choose mock core modules
+        }
+        mock {
+            // Ability to toggle mock core modules
+        }
+        fast {
+            // Allows for faster builds
+            minSdkVersion androidSdkMinimumFast
+        }
+    }
 
     buildTypes {
         debug {
@@ -85,8 +86,29 @@ android {
 //    }
 }
 
+configurations {
+    storeDebugCompile
+    mockDebugCompile
+    fastDebugCompile
+    storeReleaseCompile
+    mockReleaseCompile
+    fastReleaseCompile
+}
+
 dependencies {
-    compile project(':core')
+    storeDebugCompile project(path: ':network', configuration: 'storeDebug')
+    mockDebugCompile project(path: ':network', configuration: 'mockDebug')
+    fastDebugCompile project(path: ':network', configuration: 'fastDebug')
+    storeReleaseCompile project(path: ':network', configuration: 'storeRelease')
+    mockReleaseCompile project(path: ':network', configuration: 'mockRelease')
+    fastReleaseCompile project(path: ':network', configuration: 'fastRelease')
+
+    storeDebugCompile project(path: ':data', configuration: 'storeDebug')
+    mockDebugCompile project(path: ':data', configuration: 'mockDebug')
+    fastDebugCompile project(path: ':data', configuration: 'fastDebug')
+    storeReleaseCompile project(path: ':data', configuration: 'storeRelease')
+    mockReleaseCompile project(path: ':data', configuration: 'mockRelease')
+    fastReleaseCompile project(path: ':data', configuration: 'fastRelease')
 
     // Google Support Library
     compile "com.android.support:appcompat-v7:${androidSupportLibraryVersion}"

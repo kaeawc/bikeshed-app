@@ -20,17 +20,30 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    publishNonDefault true
+    productFlavors {
+        store {
+            // No ability to choose mock core modules
+        }
+        mock {
+            // Ability to toggle mock core modules
+        }
+        fast {
+            // Allows for faster builds
+            minSdkVersion androidSdkMinimumFast
+        }
+    }
 
-//    buildTypes {
-//        debug {
-//            debuggable true
-//            minifyEnabled false
-//        }
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
     packagingOptions {
         exclude "META-INF/LICENSE"
@@ -73,8 +86,22 @@ android {
 //    }
 }
 
+configurations {
+    storeDebugCompile
+    mockDebugCompile
+    fastDebugCompile
+    storeReleaseCompile
+    mockReleaseCompile
+    fastReleaseCompile
+}
+
 dependencies {
-    compile project(':data')
+    storeDebugCompile project(path: ':data', configuration: 'storeDebug')
+    mockDebugCompile project(path: ':data', configuration: 'mockDebug')
+    fastDebugCompile project(path: ':data', configuration: 'fastDebug')
+    storeReleaseCompile project(path: ':data', configuration: 'storeRelease')
+    mockReleaseCompile project(path: ':data', configuration: 'mockRelease')
+    fastReleaseCompile project(path: ':data', configuration: 'fastRelease')
 
     // Http
     compile "com.squareup.retrofit:retrofit:2.0.0-beta2"

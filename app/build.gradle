@@ -20,6 +20,21 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    productFlavors {
+        store {
+            // No ability to choose mock core modules
+        }
+        mock {
+            // Ability to toggle mock core modules
+            applicationId "io.kaeawc.bikeshed.mock"
+        }
+        fast {
+            // Allows for faster builds
+            applicationId "io.kaeawc.bikeshed.fast"
+            minSdkVersion androidSdkMinimumFast
+        }
+    }
+
     buildTypes {
         debug {
             debuggable true
@@ -72,12 +87,26 @@ android {
 //    }
 }
 
+configurations {
+    storeDebugCompile
+    mockDebugCompile
+    fastDebugCompile
+    storeReleaseCompile
+    mockReleaseCompile
+    fastReleaseCompile
+}
+
 dependencies {
 
     // Google Support Library
     compile "com.android.support:appcompat-v7:${androidSupportLibraryVersion}"
 
-    compile project(':ui')
+    storeDebugCompile project(path: ':ui', configuration: 'storeDebug')
+    mockDebugCompile project(path: ':ui', configuration: 'mockDebug')
+    fastDebugCompile project(path: ':ui', configuration: 'fastDebug')
+    storeReleaseCompile project(path: ':ui', configuration: 'storeRelease')
+    mockReleaseCompile project(path: ':ui', configuration: 'mockRelease')
+    fastReleaseCompile project(path: ':ui', configuration: 'fastRelease')
 
     // Unit Testing
     testCompile "junit:junit:${junitVersion}"

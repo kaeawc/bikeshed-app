@@ -32,18 +32,19 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-//    productFlavors {
-//        normal {
-//            // No ability to choose mock core modules
-//        }
-//        mock {
-//            // Ability to toggle mock core modules
-//        }
-//        fast {
-//            // Allows for faster builds
-//            minSdkVersion androidSdkMinimumFast
-//        }
-//    }
+    publishNonDefault true
+    productFlavors {
+        store {
+            // No ability to choose mock core modules
+        }
+        mock {
+            // Ability to toggle mock core modules
+        }
+        fast {
+            // Allows for faster builds
+            minSdkVersion androidSdkMinimumFast
+        }
+    }
 
     buildTypes {
         debug {
