@@ -33,7 +33,7 @@ ext.appVersionCode = 1
 ext.appVersionName = "1.0.0"
 
 // Dependency Versions
-ext.androidSupportLibraryVersion = "23.0.1"
+ext.androidSupportLibraryVersion = "23.1.0"
 ext.junitVersion = "4.12"
 ext.daggerVersion = "2.0.1"
 ext.jsr250Version = "1.0"
