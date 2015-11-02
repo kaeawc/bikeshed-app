@@ -4,6 +4,8 @@ import android.app.Application;
 import android.net.ConnectivityManager;
 
 import dagger.Component;
+import timber.log.Timber;
+
 import javax.inject.Singleton;
 
 /**
@@ -18,4 +20,5 @@ public interface AppComponent {
     // Exported for child-components.
     Application application();
     ConnectivityManager connectivityManager();
+    Timber.Tree tree();
 }

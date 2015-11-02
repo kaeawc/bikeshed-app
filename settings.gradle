@@ -1,1 +1,1 @@
-include ':app', ':data', ':network', ':ui', ':core'
+include ':app', ':core', ':storage', ':help', ':auth', ':entities', ':profile'

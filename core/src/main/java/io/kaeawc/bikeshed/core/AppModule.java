@@ -6,6 +6,8 @@ import android.net.ConnectivityManager;
 
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
+
 import javax.inject.Singleton;
 
 /**
@@ -30,5 +32,10 @@ public class AppModule {
     @Provides @Singleton
     ConnectivityManager provideConnectivityManager() {
         return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    @Provides @Singleton
+    Timber.Tree provideTree() {
+        return new Timber.DebugTree();
     }
 }

@@ -6,9 +6,13 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 public class App extends Application {
 
     private AppComponent appComponent;
+
+    private Timber.Tree tree;
 
     @Inject ConnectivityManager mConnectivityManager;
 
@@ -22,5 +26,10 @@ public class App extends Application {
     @NonNull
     public AppComponent component() {
         return appComponent;
+    }
+
+    @NonNull
+    public Timber.Tree tree() {
+        return tree;
     }
 }

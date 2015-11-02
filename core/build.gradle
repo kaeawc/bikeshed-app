@@ -100,6 +100,11 @@ android {
 
 dependencies {
 
+    // EventBus
+    compile 'de.greenrobot:eventbus:2.4.0'
+
+    compile 'org.apache.commons:commons-lang3:3.4'
+
     // Google Support Library
     compile "com.android.support:appcompat-v7:${androidSupportLibraryVersion}"
 
@@ -111,7 +116,7 @@ dependencies {
     provided "javax.annotation:jsr250-api:${jsr250Version}"
 
     // Logging
-    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile "com.jakewharton.timber:timber:3.1.0"
 
     // Unit Testing
     testCompile "junit:junit:${junitVersion}"
